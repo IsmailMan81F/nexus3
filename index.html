@@ -1,1577 +1,1712 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>NEXUS³ Studio — Work. Play. Create.</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Paprika&family=Oregano:ital@0;1&display=swap" rel="stylesheet" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-<style>
-
-*,
-*::before,
-*::after{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-:root{
-  --blue:#2979FF;
-  --blue-lt:#40C4FF;
-  --purple:#7B2FBE;
-  --purple-lt:#A855F7;
-  --coral:#FF6B6B;
-  --coral-lt:#FF9A9A;
-  --dark:#0A0A0F;
-  --dark-2:#0F0F1A;
-  --card:#13131F;
-  --border:rgba(41,121,255,0.18);
-  --text:#E8E8F0;
-  --muted:#888899;
-  --white:#FFFFFF;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:var(--dark);
-  color:var(--text);
-  font-family:'Paprika',cursive;
-  overflow-x:hidden;
-}
-
-/* ===================== SCROLLBAR ===================== */
-
-::-webkit-scrollbar{
-  width:4px;
-}
-
-::-webkit-scrollbar-track{
-  background:var(--dark);
-}
-
-::-webkit-scrollbar-thumb{
-  background:var(--blue);
-  border-radius:2px;
-}
-
-/* ===================== NAV ===================== */
-
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:100;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:0 4rem;
-  height:72px;
-
-  background:rgba(10,10,15,0.72);
-  backdrop-filter:blur(18px);
-
-  border-bottom:1px solid var(--border);
-}
-
-.nav-logo{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  text-decoration:none;
-}
-
-.nav-logo-img{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-}
-
-.nav-logo-text{
-  font-size:1.25rem;
-  color:var(--white);
-  letter-spacing:0.08em;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>NEXUS³ Studio — Work. Play. Create.</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Paprika&family=Oregano:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --blue: #2979ff;
+        --blue-lt: #40c4ff;
+        --purple: #7b2fbe;
+        --purple-lt: #a855f7;
+        --coral: #ff6b6b;
+        --coral-lt: #ff9a9a;
+        --dark: #0a0a0f;
+        --dark-2: #0f0f1a;
+        --card: #13131f;
+        --border: rgba(41, 121, 255, 0.18);
+        --text: #e8e8f0;
+        --muted: #888899;
+        --white: #ffffff;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--dark);
+        color: var(--text);
+        font-family: "Paprika", cursive;
+        overflow-x: hidden;
+      }
+
+      /* ===================== SCROLLBAR ===================== */
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--dark);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--blue);
+        border-radius: 2px;
+      }
+
+      /* ===================== NAV ===================== */
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 4rem;
+        height: 72px;
+
+        background: rgba(10, 10, 15, 0.72);
+        backdrop-filter: blur(18px);
+
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+
+      .nav-logo-img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+      }
+
+      .nav-logo-text {
+        font-size: 1.25rem;
+        color: var(--white);
+        letter-spacing: 0.08em;
+      }
 
-.nav-logo-text sup{
-  color:var(--blue);
-  font-size:0.7em;
-}
+      .nav-logo-text sup {
+        color: var(--blue);
+        font-size: 0.7em;
+      }
 
-.nav-links{
-  display:flex;
-  gap:2.8rem;
-  list-style:none;
-}
+      .nav-links {
+        display: flex;
+        gap: 2.8rem;
+        list-style: none;
+      }
 
-.nav-links a{
-  font-family:'Oregano',cursive;
-  font-size:1rem;
-  color:var(--muted);
-  text-decoration:none;
-  letter-spacing:0.06em;
+      .nav-links a {
+        font-family: "Oregano", cursive;
+        font-size: 1rem;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.06em;
+
+        position: relative;
+        transition: color 0.2s;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+
+        width: 0;
+        height: 1.5px;
+
+        background: var(--blue);
+
+        transition: width 0.28s;
+      }
+
+      .nav-links a:hover {
+        color: var(--white);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        padding: 0.5rem 1.5rem;
+
+        background: linear-gradient(135deg, var(--blue), var(--purple));
+
+        border: none;
+        border-radius: 6px;
+
+        color: var(--white);
+
+        cursor: pointer;
+
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
 
-  position:relative;
-  transition:color .2s;
-}
+      .nav-cta:hover {
+        opacity: 0.88;
+        transform: translateY(-1px);
+      }
 
-.nav-links a::after{
-  content:'';
-  position:absolute;
-  bottom:-3px;
-  left:0;
+      /* ===================== HERO ===================== */
 
-  width:0;
-  height:1.5px;
+      .hero {
+        position: relative;
 
-  background:var(--blue);
+        min-height: 100vh;
 
-  transition:width .28s;
-}
+        display: flex;
+        align-items: center;
 
-.nav-links a:hover{
-  color:var(--white);
-}
+        padding: 0 4rem;
 
-.nav-links a:hover::after{
-  width:100%;
-}
+        overflow: hidden;
+      }
 
-.nav-cta{
-  padding:.5rem 1.5rem;
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+      }
 
-  background:linear-gradient(135deg,var(--blue),var(--purple));
+      .hero-bg-img {
+        position: absolute;
+        inset: 0;
 
-  border:none;
-  border-radius:6px;
+        background: url("assets/gaming2.png") center/cover no-repeat;
 
-  color:var(--white);
+        opacity: 0.18;
+      }
 
-  cursor:pointer;
+      .hero-bg-grad {
+        position: absolute;
+        inset: 0;
 
-  transition:opacity .2s, transform .2s;
-}
+        background:
+          radial-gradient(
+            ellipse 60% 80% at 80% 50%,
+            rgba(41, 121, 255, 0.12) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 60% at 20% 80%,
+            rgba(123, 47, 190, 0.14) 0%,
+            transparent 60%
+          ),
+          linear-gradient(
+            180deg,
+            var(--dark) 0%,
+            transparent 30%,
+            transparent 70%,
+            var(--dark) 100%
+          );
+      }
 
-.nav-cta:hover{
-  opacity:.88;
-  transform:translateY(-1px);
-}
+      .hero-grid {
+        position: absolute;
+        inset: 0;
 
-/* ===================== HERO ===================== */
+        background-image:
+          linear-gradient(rgba(41, 121, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(41, 121, 255, 0.04) 1px, transparent 1px);
 
-.hero{
-  position:relative;
+        background-size: 64px 64px;
+      }
 
-  min-height:100vh;
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+      }
 
-  display:flex;
-  align-items:center;
+      .hero-tag {
+        font-family: "Oregano", cursive;
+        font-style: italic;
 
-  padding:0 4rem;
+        font-size: 1rem;
 
-  overflow:hidden;
-}
+        color: var(--blue-lt);
 
-.hero-bg{
-  position:absolute;
-  inset:0;
-}
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
 
-.hero-bg-img{
-  position:absolute;
-  inset:0;
+        margin-bottom: 1.4rem;
 
-  background:
-  url('assets/gaming2.png')
-  center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-  opacity:.18;
-}
+      .hero-tag::before {
+        content: "";
 
-.hero-bg-grad{
-  position:absolute;
-  inset:0;
+        width: 32px;
+        height: 1.5px;
 
-  background:
-  radial-gradient(
-    ellipse 60% 80% at 80% 50%,
-    rgba(41,121,255,0.12) 0%,
-    transparent 70%
-  ),
+        background: var(--blue);
+      }
 
-  radial-gradient(
-    ellipse 40% 60% at 20% 80%,
-    rgba(123,47,190,0.14) 0%,
-    transparent 60%
-  ),
+      .hero-h1 {
+        font-size: clamp(3rem, 6vw, 5.5rem);
+        line-height: 1.04;
 
-  linear-gradient(
-    180deg,
-    var(--dark) 0%,
-    transparent 30%,
-    transparent 70%,
-    var(--dark) 100%
-  );
-}
+        color: var(--white);
 
-.hero-grid{
-  position:absolute;
-  inset:0;
+        margin-bottom: 0.5rem;
+      }
 
-  background-image:
-  linear-gradient(rgba(41,121,255,0.04) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(41,121,255,0.04) 1px, transparent 1px);
+      .hero-h1 .accent-blue {
+        color: var(--blue);
+      }
 
-  background-size:64px 64px;
-}
+      .hero-h1 .accent-coral {
+        color: var(--coral);
+      }
 
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:700px;
-}
+      .hero-sub {
+        font-family: "Oregano", cursive;
 
-.hero-tag{
-  font-family:'Oregano',cursive;
-  font-style:italic;
+        font-size: 1.35rem;
+        color: var(--muted);
 
-  font-size:1rem;
+        margin: 1.6rem 0 2.6rem;
 
-  color:var(--blue-lt);
+        letter-spacing: 0.04em;
 
-  letter-spacing:.16em;
-  text-transform:uppercase;
+        max-width: 480px;
+        line-height: 1.65;
+      }
 
-  margin-bottom:1.4rem;
+      .hero-btns {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+      }
 
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+      .btn-primary {
+        padding: 0.85rem 2.2rem;
 
-.hero-tag::before{
-  content:'';
+        background: linear-gradient(135deg, var(--blue), var(--purple-lt));
 
-  width:32px;
-  height:1.5px;
+        border: none;
+        border-radius: 8px;
 
-  background:var(--blue);
-}
+        color: var(--white);
 
-.hero-h1{
-  font-size:clamp(3rem,6vw,5.5rem);
-  line-height:1.04;
+        cursor: pointer;
 
-  color:var(--white);
+        box-shadow: 0 0 30px rgba(41, 121, 255, 0.35);
 
-  margin-bottom:.5rem;
-}
+        transition:
+          box-shadow 0.25s,
+          transform 0.2s;
+      }
 
-.hero-h1 .accent-blue{
-  color:var(--blue);
-}
+      .btn-primary:hover {
+        box-shadow: 0 0 50px rgba(41, 121, 255, 0.6);
+        transform: translateY(-2px);
+      }
 
-.hero-h1 .accent-coral{
-  color:var(--coral);
-}
+      .btn-outline {
+        padding: 0.85rem 2.2rem;
 
-.hero-sub{
-  font-family:'Oregano',cursive;
+        background: transparent;
 
-  font-size:1.35rem;
-  color:var(--muted);
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
 
-  margin:1.6rem 0 2.6rem;
+        color: var(--text);
 
-  letter-spacing:.04em;
+        cursor: pointer;
 
-  max-width:480px;
-  line-height:1.65;
-}
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
 
-.hero-btns{
-  display:flex;
-  gap:1.2rem;
-  align-items:center;
-}
+      .btn-outline:hover {
+        border-color: var(--blue);
+        color: var(--white);
+      }
 
-.btn-primary{
-  padding:.85rem 2.2rem;
+      .hero-pillars {
+        position: absolute;
 
-  background:
-  linear-gradient(
-    135deg,
-    var(--blue),
-    var(--purple-lt)
-  );
+        right: 4rem;
+        top: 50%;
 
-  border:none;
-  border-radius:8px;
+        transform: translateY(-50%);
 
-  color:var(--white);
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
 
-  cursor:pointer;
+        z-index: 2;
+      }
 
-  box-shadow:0 0 30px rgba(41,121,255,.35);
+      .pillar-chip {
+        display: flex;
+        align-items: center;
+        gap: 12px;
 
-  transition:
-  box-shadow .25s,
-  transform .2s;
-}
+        padding: 0.75rem 1.4rem;
 
-.btn-primary:hover{
-  box-shadow:0 0 50px rgba(41,121,255,.6);
-  transform:translateY(-2px);
-}
+        background: rgba(255, 255, 255, 0.03);
 
-.btn-outline{
-  padding:.85rem 2.2rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
 
-  background:transparent;
+        backdrop-filter: blur(10px);
 
-  border:1.5px solid var(--border);
-  border-radius:8px;
+        transition: border-color 0.25s;
+      }
 
-  color:var(--text);
+      .pillar-chip:hover {
+        border-color: var(--blue);
+      }
 
-  cursor:pointer;
+      .pillar-icon {
+        font-size: 1.4rem;
+      }
 
-  transition:border-color .2s,color .2s;
-}
+      .pillar-label {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
 
-.btn-outline:hover{
-  border-color:var(--blue);
-  color:var(--white);
-}
+      .pillar-label span {
+        display: block;
+        color: var(--white);
+        font-size: 0.92rem;
+      }
 
-.hero-pillars{
-  position:absolute;
+      .scroll-hint {
+        position: absolute;
 
-  right:4rem;
-  top:50%;
+        bottom: 2.5rem;
+        left: 50%;
 
-  transform:translateY(-50%);
+        transform: translateX(-50%);
 
-  display:flex;
-  flex-direction:column;
-  gap:1.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
 
-  z-index:2;
-}
+        font-family: "Oregano", cursive;
+        font-size: 0.8rem;
 
-.pillar-chip{
-  display:flex;
-  align-items:center;
-  gap:12px;
+        color: var(--muted);
 
-  padding:.75rem 1.4rem;
+        z-index: 2;
+      }
 
-  background:rgba(255,255,255,.03);
+      .scroll-line {
+        width: 1px;
+        height: 48px;
 
-  border:1px solid var(--border);
-  border-radius:10px;
+        background: linear-gradient(to bottom, var(--blue), transparent);
 
-  backdrop-filter:blur(10px);
+        animation: scrollPulse 2s ease-in-out infinite;
+      }
 
-  transition:border-color .25s;
-}
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scaleY(0.6);
+        }
 
-.pillar-chip:hover{
-  border-color:var(--blue);
-}
+        50% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+      }
 
-.pillar-icon{
-  font-size:1.4rem;
-}
+      /* ===================== SECTIONS ===================== */
 
-.pillar-label{
-  font-size:.85rem;
-  color:var(--muted);
-}
+      section {
+        padding: 7rem 4rem;
+      }
 
-.pillar-label span{
-  display:block;
-  color:var(--white);
-  font-size:.92rem;
-}
+      .section-label {
+        font-family: "Oregano", cursive;
+        font-style: italic;
 
-.scroll-hint{
-  position:absolute;
+        font-size: 0.88rem;
+        color: var(--blue-lt);
 
-  bottom:2.5rem;
-  left:50%;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
 
-  transform:translateX(-50%);
+        margin-bottom: 0.9rem;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-  font-family:'Oregano',cursive;
-  font-size:.8rem;
+      .section-label::before {
+        content: "";
 
-  color:var(--muted);
+        width: 24px;
+        height: 1.5px;
 
-  z-index:2;
-}
+        background: var(--blue);
+      }
 
-.scroll-line{
-  width:1px;
-  height:48px;
+      .section-title {
+        font-size: clamp(2rem, 3.5vw, 3rem);
 
-  background:
-  linear-gradient(
-    to bottom,
-    var(--blue),
-    transparent
-  );
+        color: var(--white);
 
-  animation:scrollPulse 2s ease-in-out infinite;
-}
+        line-height: 1.15;
 
-@keyframes scrollPulse{
-  0%,100%{
-    opacity:.3;
-    transform:scaleY(.6);
-  }
+        margin-bottom: 1.2rem;
+      }
 
-  50%{
-    opacity:1;
-    transform:scaleY(1);
-  }
-}
+      .section-desc {
+        font-family: "Oregano", cursive;
 
-/* ===================== SECTIONS ===================== */
+        font-size: 1.05rem;
 
-section{
-  padding:7rem 4rem;
-}
+        color: var(--muted);
 
-.section-label{
-  font-family:'Oregano',cursive;
-  font-style:italic;
+        max-width: 580px;
+        line-height: 1.7;
+      }
 
-  font-size:.88rem;
-  color:var(--blue-lt);
+      /* ===================== ABOUT ===================== */
 
-  letter-spacing:.2em;
-  text-transform:uppercase;
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
 
-  margin-bottom:.9rem;
+        align-items: center;
+      }
 
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+      .about-visual {
+        position: relative;
 
-.section-label::before{
-  content:'';
+        border-radius: 20px;
+        overflow: hidden;
 
-  width:24px;
-  height:1.5px;
+        aspect-ratio: 4/3;
+      }
 
-  background:var(--blue);
-}
+      .img-placeholder {
+        width: 100%;
+        height: 100%;
 
-.section-title{
-  font-size:clamp(2rem,3.5vw,3rem);
+        background: linear-gradient(135deg, #0d0d1a, #1a1a2e);
 
-  color:var(--white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
 
-  line-height:1.15;
+        border: 1px solid var(--border);
+        border-radius: 20px;
 
-  margin-bottom:1.2rem;
-}
+        color: var(--muted);
 
-.section-desc{
-  font-family:'Oregano',cursive;
+        text-align: center;
+      }
 
-  font-size:1.05rem;
+      .ph-big {
+        font-size: 3rem;
+        opacity: 0.35;
+      }
 
-  color:var(--muted);
+      .about-glow {
+        position: absolute;
 
-  max-width:580px;
-  line-height:1.7;
-}
+        top: 20%;
+        left: 20%;
 
-/* ===================== ABOUT ===================== */
+        width: 60%;
+        height: 60%;
 
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:5rem;
+        border-radius: 50%;
 
-  align-items:center;
-}
+        background: radial-gradient(
+          circle,
+          rgba(41, 121, 255, 0.15),
+          transparent 70%
+        );
 
-.about-visual{
-  position:relative;
+        filter: blur(30px);
+      }
 
-  border-radius:20px;
-  overflow:hidden;
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
 
-  aspect-ratio:4/3;
-}
+        margin-top: 3rem;
+      }
 
-.img-placeholder{
-  width:100%;
-  height:100%;
+      .stat-box {
+        padding: 1.4rem;
 
-  background:
-  linear-gradient(
-    135deg,
-    #0d0d1a,
-    #1a1a2e
-  );
+        background: var(--card);
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
 
-  border:1px solid var(--border);
-  border-radius:20px;
+        text-align: center;
 
-  color:var(--muted);
+        transition: border-color 0.25s;
+      }
 
-  text-align:center;
-}
+      .stat-box:hover {
+        border-color: var(--purple-lt);
+      }
 
-.ph-big{
-  font-size:3rem;
-  opacity:.35;
-}
+      .stat-num {
+        display: block;
 
-.about-glow{
-  position:absolute;
+        font-size: 2rem;
+        color: var(--blue);
 
-  top:20%;
-  left:20%;
+        margin-bottom: 0.3rem;
+      }
 
-  width:60%;
-  height:60%;
+      .stat-label {
+        font-family: "Oregano", cursive;
 
-  border-radius:50%;
+        font-size: 0.8rem;
+        color: var(--muted);
 
-  background:
-  radial-gradient(
-    circle,
-    rgba(41,121,255,.15),
-    transparent 70%
-  );
+        letter-spacing: 0.1em;
+      }
 
-  filter:blur(30px);
-}
+      /* ===================== CAMPUS ===================== */
 
-.stats-row{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
+      .campus-section {
+        background: var(--dark);
+      }
 
-  margin-top:3rem;
-}
+      .campus-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
 
-.stat-box{
-  padding:1.4rem;
+        margin-top: 4rem;
+      }
 
-  background:var(--card);
+      .floor-card {
+        width: 100%;
 
-  border:1px solid var(--border);
-  border-radius:14px;
+        background: var(--card);
 
-  text-align:center;
+        border: 1px solid var(--border);
+        border-radius: 20px;
 
-  transition:border-color .25s;
-}
+        overflow: hidden;
 
-.stat-box:hover{
-  border-color:var(--purple-lt);
-}
+        transition:
+          transform 0.3s,
+          border-color 0.3s;
+      }
 
-.stat-num{
-  display:block;
+      .floor-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--blue);
+      }
 
-  font-size:2rem;
-  color:var(--blue);
+      .floor-card-img-ph {
+        height: 240px;
 
-  margin-bottom:.3rem;
-}
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
 
-.stat-label{
-  font-family:'Oregano',cursive;
+        background: linear-gradient(135deg, #0d0d1a, #1a1a2e);
 
-  font-size:.8rem;
-  color:var(--muted);
+        border-bottom: 1px solid var(--border);
 
-  letter-spacing:.1em;
-}
+        color: var(--muted);
+      }
 
-/* ===================== CAMPUS ===================== */
+      .ph-icon {
+        font-size: 2.5rem;
+        opacity: 0.4;
+      }
 
-.campus-section{
-  background:var(--dark);
-}
+      .floor-card-body {
+        padding: 1.8rem;
+      }
 
-.campus-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2rem;
+      .floor-num {
+        font-family: "Oregano", cursive;
 
-  margin-top:4rem;
-}
+        font-size: 0.82rem;
 
-.floor-card{
-  width:100%;
+        color: var(--muted);
 
-  background:var(--card);
+        margin-bottom: 0.5rem;
 
-  border:1px solid var(--border);
-  border-radius:20px;
+        letter-spacing: 0.15em;
+      }
 
-  overflow:hidden;
+      .floor-title {
+        font-size: 1.35rem;
+        color: var(--white);
 
-  transition:
-  transform .3s,
-  border-color .3s;
-}
+        margin-bottom: 1rem;
+      }
 
-.floor-card:hover{
-  transform:translateY(-5px);
-  border-color:var(--blue);
-}
+      .floor-features {
+        list-style: none;
 
-.floor-card-img-ph{
-  height:240px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
+      .floor-features li {
+        display: flex;
+        gap: 10px;
 
-  background:
-  linear-gradient(
-    135deg,
-    #0d0d1a,
-    #1a1a2e
-  );
+        font-family: "Oregano", cursive;
 
-  border-bottom:1px solid var(--border);
+        color: var(--muted);
 
-  color:var(--muted);
-}
+        line-height: 1.45;
+      }
 
-.ph-icon{
-  font-size:2.5rem;
-  opacity:.4;
-}
+      .floor-features li::before {
+        content: "›";
+        color: var(--blue);
+      }
 
-.floor-card-body{
-  padding:1.8rem;
-}
+      /* ===================== SPECS ===================== */
 
-.floor-num{
-  font-family:'Oregano',cursive;
+      .specs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
 
-  font-size:.82rem;
+        gap: 2rem;
 
-  color:var(--muted);
+        margin-top: 3.5rem;
+      }
 
-  margin-bottom:.5rem;
+      .spec-card {
+        background: var(--card);
 
-  letter-spacing:.15em;
-}
+        border: 1px solid var(--border);
+        border-radius: 18px;
 
-.floor-title{
-  font-size:1.35rem;
-  color:var(--white);
+        padding: 2rem;
 
-  margin-bottom:1rem;
-}
+        transition:
+          border-color 0.25s,
+          transform 0.25s;
+      }
 
-.floor-features{
-  list-style:none;
+      .spec-card:hover {
+        transform: translateY(-5px);
+      }
 
-  display:flex;
-  flex-direction:column;
-  gap:.6rem;
-}
+      .spec-card.c-blue:hover {
+        border-color: var(--blue);
+      }
 
-.floor-features li{
-  display:flex;
-  gap:10px;
+      .spec-card.c-purple:hover {
+        border-color: var(--purple-lt);
+      }
 
-  font-family:'Oregano',cursive;
+      .spec-card.c-coral:hover {
+        border-color: var(--coral);
+      }
 
-  color:var(--muted);
+      .spec-icon {
+        font-size: 2.2rem;
+        margin-bottom: 1.2rem;
+      }
 
-  line-height:1.45;
-}
+      .spec-title {
+        font-size: 1.1rem;
+        color: var(--white);
 
-.floor-features li::before{
-  content:'›';
-  color:var(--blue);
-}
+        margin-bottom: 1rem;
+      }
 
-/* ===================== SPECS ===================== */
+      .spec-list {
+        list-style: none;
 
-.specs-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
 
-  gap:2rem;
+      .spec-list li {
+        font-family: "Oregano", cursive;
+        color: var(--muted);
+      }
 
-  margin-top:3.5rem;
-}
+      /* ===================== TEAM ===================== */
 
-.spec-card{
-  background:var(--card);
+      .team-section {
+        background: var(--dark-2);
+      }
 
-  border:1px solid var(--border);
-  border-radius:18px;
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
 
-  padding:2rem;
+        gap: 1.6rem;
 
-  transition:
-  border-color .25s,
-  transform .25s;
-}
+        margin-top: 3.5rem;
+      }
 
-.spec-card:hover{
-  transform:translateY(-5px);
-}
+      .team-card {
+        background: var(--card);
 
-.spec-card.c-blue:hover{
-  border-color:var(--blue);
-}
+        border: 1px solid var(--border);
+        border-radius: 16px;
 
-.spec-card.c-purple:hover{
-  border-color:var(--purple-lt);
-}
+        padding: 1.8rem 1.4rem;
 
-.spec-card.c-coral:hover{
-  border-color:var(--coral);
-}
+        text-align: center;
 
-.spec-icon{
-  font-size:2.2rem;
-  margin-bottom:1.2rem;
-}
+        transition:
+          border-color 0.25s,
+          transform 0.25s;
+      }
 
-.spec-title{
-  font-size:1.1rem;
-  color:var(--white);
+      .team-card:hover {
+        border-color: var(--purple-lt);
+        transform: translateY(-5px);
+      }
 
-  margin-bottom:1rem;
-}
+      .team-avatar {
+        width: 64px;
+        height: 64px;
 
-.spec-list{
-  list-style:none;
+        border-radius: 50%;
 
-  display:flex;
-  flex-direction:column;
-  gap:.5rem;
-}
+        background: linear-gradient(135deg, var(--blue), var(--purple));
 
-.spec-list li{
-  font-family:'Oregano',cursive;
-  color:var(--muted);
-}
+        margin: 0 auto 1rem;
 
-/* ===================== TEAM ===================== */
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-.team-section{
-  background:var(--dark-2);
-}
+        color: var(--white);
+      }
 
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
+      .team-name {
+        color: var(--white);
+        margin-bottom: 0.3rem;
+      }
 
-  gap:1.6rem;
+      .team-role {
+        font-family: "Oregano", cursive;
 
-  margin-top:3.5rem;
-}
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
 
-.team-card{
-  background:var(--card);
+      /* ===================== CTA ===================== */
 
-  border:1px solid var(--border);
-  border-radius:16px;
+      .cta-section {
+        position: relative;
 
-  padding:1.8rem 1.4rem;
+        overflow: hidden;
 
-  text-align:center;
+        text-align: center;
+      }
 
-  transition:
-  border-color .25s,
-  transform .25s;
-}
+      .cta-bg {
+        position: absolute;
+        inset: 0;
 
-.team-card:hover{
-  border-color:var(--purple-lt);
-  transform:translateY(-5px);
-}
+        background: radial-gradient(
+          ellipse 60% 100% at 50% 50%,
+          rgba(41, 121, 255, 0.13) 0%,
+          transparent 70%
+        );
+      }
 
-.team-avatar{
-  width:64px;
-  height:64px;
+      .cta-content {
+        position: relative;
+        z-index: 2;
 
-  border-radius:50%;
+        max-width: 700px;
+        margin: auto;
+      }
 
-  background:
-  linear-gradient(
-    135deg,
-    var(--blue),
-    var(--purple)
-  );
+      .cta-title {
+        font-size: clamp(2.2rem, 4vw, 3.5rem);
 
-  margin:0 auto 1rem;
+        color: var(--white);
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+        line-height: 1.15;
 
-  color:var(--white);
-}
+        margin-bottom: 1.2rem;
+      }
 
-.team-name{
-  color:var(--white);
-  margin-bottom:.3rem;
-}
+      .cta-sub {
+        font-family: "Oregano", cursive;
 
-.team-role{
-  font-family:'Oregano',cursive;
+        font-size: 1.1rem;
+        color: var(--muted);
 
-  font-size:.82rem;
-  color:var(--muted);
-}
+        line-height: 1.65;
 
-/* ===================== CTA ===================== */
+        margin-bottom: 2.5rem;
+      }
 
-.cta-section{
-  position:relative;
+      /* ===================== FOOTER ===================== */
 
-  overflow:hidden;
+      footer {
+        background: var(--dark);
 
-  text-align:center;
-}
+        border-top: 1px solid var(--border);
 
-.cta-bg{
-  position:absolute;
-  inset:0;
+        padding: 4rem 4rem 2.5rem;
+      }
 
-  background:
-  radial-gradient(
-    ellipse 60% 100% at 50% 50%,
-    rgba(41,121,255,.13) 0%,
-    transparent 70%
-  );
-}
+      .footer-top {
+        display: grid;
+        grid-template-columns: 1.8fr 1fr 1fr;
 
-.cta-content{
-  position:relative;
-  z-index:2;
+        gap: 4rem;
 
-  max-width:700px;
-  margin:auto;
-}
+        margin-bottom: 3rem;
+      }
 
-.cta-title{
-  font-size:clamp(2.2rem,4vw,3.5rem);
+      .footer-brand-name {
+        font-size: 1.4rem;
+        color: var(--white);
 
-  color:var(--white);
+        margin-bottom: 0.8rem;
+      }
 
-  line-height:1.15;
+      .footer-brand-name sup {
+        color: var(--blue);
+      }
 
-  margin-bottom:1.2rem;
-}
+      .footer-brand-desc {
+        font-family: "Oregano", cursive;
 
-.cta-sub{
-  font-family:'Oregano',cursive;
+        color: var(--muted);
 
-  font-size:1.1rem;
-  color:var(--muted);
+        line-height: 1.65;
 
-  line-height:1.65;
+        max-width: 300px;
+      }
 
-  margin-bottom:2.5rem;
-}
+      .footer-col h4 {
+        font-family: "Oregano", cursive;
 
-/* ===================== FOOTER ===================== */
+        color: var(--blue-lt);
 
-footer{
-  background:var(--dark);
+        margin-bottom: 1.2rem;
+      }
 
-  border-top:1px solid var(--border);
+      .footer-col ul {
+        list-style: none;
 
-  padding:4rem 4rem 2.5rem;
-}
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
 
-.footer-top{
-  display:grid;
-  grid-template-columns:1.8fr 1fr 1fr;
+      .footer-col ul a {
+        font-family: "Oregano", cursive;
 
-  gap:4rem;
+        color: var(--muted);
 
-  margin-bottom:3rem;
-}
+        text-decoration: none;
+      }
 
-.footer-brand-name{
-  font-size:1.4rem;
-  color:var(--white);
+      .footer-col ul a:hover {
+        color: var(--white);
+      }
 
-  margin-bottom:.8rem;
-}
+      .footer-bottom {
+        border-top: 1px solid var(--border);
 
-.footer-brand-name sup{
-  color:var(--blue);
-}
+        padding-top: 1.8rem;
 
-.footer-brand-desc{
-  font-family:'Oregano',cursive;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
 
-  color:var(--muted);
+      .footer-copy {
+        font-family: "Oregano", cursive;
+        color: var(--muted);
+      }
 
-  line-height:1.65;
+      .footer-motto {
+        font-family: "Oregano", cursive;
 
-  max-width:300px;
-}
+        color: var(--blue-lt);
+      }
 
-.footer-col h4{
-  font-family:'Oregano',cursive;
+      /* ===================== ANIMATIONS ===================== */
 
-  color:var(--blue-lt);
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+      }
 
-  margin-bottom:1.2rem;
-}
+      .fade-left {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
 
-.footer-col ul{
-  list-style:none;
+      .fade-right {
+        opacity: 0;
+        transform: translateX(30px);
+      }
 
-  display:flex;
-  flex-direction:column;
-  gap:.65rem;
-}
+      .img-placeholder {
+        background: url("assets/exterior.png") center/cover no-repeat;
+      }
 
-.footer-col ul a{
-  font-family:'Oregano',cursive;
+      .img1 {
+        background: url("assets/office1.png") center/cover no-repeat;
+      }
 
-  color:var(--muted);
+      .img2 {
+        background: url("assets/gaming2.png") center/cover no-repeat;
+      }
 
-  text-decoration:none;
-}
+      .img3 {
+        background: url("assets/office2.png") center/cover no-repeat;
+      }
 
-.footer-col ul a:hover{
-  color:var(--white);
-}
-
-.footer-bottom{
-  border-top:1px solid var(--border);
-
-  padding-top:1.8rem;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-}
-
-.footer-copy{
-  font-family:'Oregano',cursive;
-  color:var(--muted);
-}
-
-.footer-motto{
-  font-family:'Oregano',cursive;
-
-  color:var(--blue-lt);
-}
-
-/* ===================== ANIMATIONS ===================== */
-
-.fade-up{
-  opacity:0;
-  transform:translateY(30px);
-}
-
-.fade-left{
-  opacity:0;
-  transform:translateX(-30px);
-}
-
-.fade-right{
-  opacity:0;
-  transform:translateX(30px);
-}
-
-.img-placeholder {
-    background: url("assets/exterior.png") center/cover no-repeat;
-}
-
-.img1 {
-    background: url("assets/office1.png") center/cover no-repeat;
-}
-
-.img2 {
-    background: url("assets/gaming2.png") center/cover no-repeat;
-}
-
-.img3 {
-    background: url("assets/office2.png") center/cover no-repeat;
-}
-
-/* ===================== MOBILE MENU ===================== */ .menu-btn{ display:none; width:52px; height:52px; background:transparent; border:none; position:relative; z-index:1002; cursor:pointer; } .menu-btn span{ position:absolute; left:50%; top:50%; width:28px; height:2px; background:var(--white); border-radius:10px; transition: transform .35s ease, opacity .25s ease; transform-origin:center; } .menu-btn span:first-child{ transform:translate(-50%,-8px); } .menu-btn span:last-child{ transform:translate(-50%,8px); } .menu-btn.active span:first-child{ transform:translate(-50%,-50%) rotate(45deg); } .menu-btn.active span:last-child{ transform:translate(-50%,-50%) rotate(-45deg); } .mobile-menu{ position:fixed; inset:0; background:rgba(10,10,15,.96); backdrop-filter:blur(18px); z-index:1000; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; pointer-events:none; transition: opacity .4s ease, visibility .4s ease; } .mobile-menu.active{ opacity:1; visibility:visible; pointer-events:auto; } .mobile-menu-content{ display:flex; flex-direction:column; align-items:center; gap:2rem; } .mobile-link{ font-size:2rem; color:var(--white); text-decoration:none; font-family:'Oregano',cursive; transform:translateY(20px); opacity:0; transition: opacity .45s ease, transform .45s ease; } .mobile-menu.active .mobile-link{ transform:translateY(0); opacity:1; } .mobile-link:nth-child(1){ transition-delay:.08s; } .mobile-link:nth-child(2){ transition-delay:.14s; } .mobile-link:nth-child(3){ transition-delay:.2s; } .mobile-link:nth-child(4){ transition-delay:.26s; } .mobile-cta{ margin-top:1rem; opacity:0; transform:translateY(20px); transition: opacity .45s ease, transform .45s ease; transition-delay:.32s; } .mobile-menu.active .mobile-cta{ opacity:1; transform:translateY(0); }
-
-/* ===================== RESPONSIVE ===================== */
-@media(max-width:1100px){ .campus-grid{ grid-template-columns:1fr; } .team-grid{ grid-template-columns:repeat(2,1fr); } .about-grid{ grid-template-columns:1fr; gap:3rem; } .stats-row{ grid-template-columns:1fr; } } @media(max-width:900px){ nav{ padding:0 1.4rem; } .nav-links, .nav-cta{ display:none; } .menu-btn{ display:block; } section, .hero{ padding:5rem 1.4rem; } .hero{ min-height:auto; padding-top:8rem; padding-bottom:6rem; } .hero-pillars{ display:none; } .hero-content{ max-width:100%; } .hero-sub{ max-width:100%; font-size:1.15rem; } .hero-btns{ flex-direction:column; align-items:stretch; width:100%; } .btn-primary, .btn-outline{ width:100%; } .about-grid{ gap:2.5rem; } .about-visual{ width:100%; min-width:0; } .img-placeholder{ width:100%; } .section-title{ font-size:2rem; line-height:1.2; } .section-desc{ max-width:100%; } .specs-grid{ grid-template-columns:1fr; } .footer-top{ grid-template-columns:1fr; } } @media(max-width:700px){ .team-grid{ grid-template-columns:1fr; } .hero-h1{ font-size:3rem; } .mobile-link{ font-size:1.8rem; } .stats-row{ gap:1rem; } .floor-card-body{ padding:1.4rem; } }
-
-</style>
-</head>
-
-<body>
-
-<!-- NAV --> <nav id="navbar"> <a class="nav-logo" href="#"> <img class="nav-logo-img" src="./assets/logo.png" alt="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" /> <div style="display:none;width:42px;height:42px;background:linear-gradient(135deg,#2979FF,#7B2FBE);border-radius:8px;align-items:center;justify-content:center;color:#fff;"> N³ </div> <span class="nav-logo-text"> NEXUS<sup>3</sup> STUDIO </span> </a> <ul class="nav-links"> <li><a href="#about">About</a></li> <li><a href="#campus">Campus</a></li> <li><a href="#specs">Tech</a></li> <li><a href="#team">Team</a></li> </ul> <button class="nav-cta"> Book a Session </button> <!-- MOBILE MENU BTN --> <button class="menu-btn" id="menuBtn"> <span></span> <span></span> </button> </nav> <!-- MOBILE MENU --> <div class="mobile-menu" id="mobileMenu"> <div class="mobile-menu-content"> <a href="#about" class="mobile-link">About</a> <a href="#campus" class="mobile-link">Campus</a> <a href="#specs" class="mobile-link">Tech</a> <a href="#team" class="mobile-link">Team</a> <button class="btn-primary mobile-cta"> Book a Session </button> </div> </div>
-
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="hero-bg">
-    <div class="hero-bg-img"></div>
-    <div class="hero-bg-grad"></div>
-    <div class="hero-grid"></div>
-  </div>
-
-  <div class="hero-content">
-
-    <div class="hero-tag">
-      The Digital Campus of the Next Generation
-    </div>
-
-    <h1 class="hero-h1">
-      <span class="accent-blue">Work.</span><br>
-      <span class="accent-coral">Play.</span><br>
-      Create.
-    </h1>
-
-    <p class="hero-sub">
-      North Africa's most ambitious integrated digital hub —
-      three floors, one premium ecosystem.
-    </p>
-
-    <div class="hero-btns">
-      <button class="btn-primary">Explore the Campus</button>
-      <button class="btn-outline">Watch the Story</button>
-    </div>
-
-  </div>
-
-  <div class="hero-pillars">
-
-    <div class="pillar-chip">
-      <span class="pillar-icon">💼</span>
-
-      <div class="pillar-label">
-        <span>Productivity Zone</span>
-        Floor 01 — Coworking
-      </div>
-    </div>
-
-    <div class="pillar-chip">
-      <span class="pillar-icon">🎮</span>
-
-      <div class="pillar-label">
-        <span>Gaming Arena</span>
-        Floor 02 — Esports
-      </div>
-    </div>
-
-    <div class="pillar-chip">
-      <span class="pillar-icon">🎙️</span>
-
-      <div class="pillar-label">
-        <span>Creator Studios</span>
-        Floor 03 — Content
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ABOUT -->
-
-<section id="about" style="background:var(--dark-2);">
-
-  <div class="about-grid">
-
-    <div>
-
-      <p class="section-label fade-left">
-        Who We Are
-      </p>
-
-      <h2 class="section-title fade-left">
-        The Digital Nexus<br>
-        of North Africa
-      </h2>
-
-      <p class="section-desc fade-left">
-        NEXUS³ Studio is a groundbreaking 3-floor digital campus in Algeria,
-        meticulously designed to converge the essential pillars of modern
-        digital life into one premium ecosystem.
-      </p>
-
-      <div class="stats-row">
-
-        <div class="stat-box fade-up">
-          <span class="stat-num">3</span>
-          <span class="stat-label">Floors</span>
+      /* ===================== MOBILE MENU ===================== */
+      .menu-btn {
+        display: none;
+        width: 52px;
+        height: 52px;
+        background: transparent;
+        border: none;
+        position: relative;
+        z-index: 1002;
+        cursor: pointer;
+      }
+      .menu-btn span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 28px;
+        height: 2px;
+        background: var(--white);
+        border-radius: 10px;
+        transition:
+          transform 0.35s ease,
+          opacity 0.25s ease;
+        transform-origin: center;
+      }
+      .menu-btn span:first-child {
+        transform: translate(-50%, -8px);
+      }
+      .menu-btn span:last-child {
+        transform: translate(-50%, 8px);
+      }
+      .menu-btn.active span:first-child {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      .menu-btn.active span:last-child {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      .mobile-menu {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 15, 0.96);
+        backdrop-filter: blur(18px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 0.4s ease,
+          visibility 0.4s ease;
+      }
+      .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      .mobile-menu-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      .mobile-link {
+        font-size: 2rem;
+        color: var(--white);
+        text-decoration: none;
+        font-family: "Oregano", cursive;
+        transform: translateY(20px);
+        opacity: 0;
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
+      }
+      .mobile-menu.active .mobile-link {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .mobile-link:nth-child(1) {
+        transition-delay: 0.08s;
+      }
+      .mobile-link:nth-child(2) {
+        transition-delay: 0.14s;
+      }
+      .mobile-link:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .mobile-link:nth-child(4) {
+        transition-delay: 0.26s;
+      }
+      .mobile-cta {
+        margin-top: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
+        transition-delay: 0.32s;
+      }
+      .mobile-menu.active .mobile-cta {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===================== RESPONSIVE ===================== */
+      @media (max-width: 1100px) {
+        .campus-grid {
+          grid-template-columns: 1fr;
+        }
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .stats-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 900px) {
+        nav {
+          padding: 0 1.4rem;
+        }
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+        .menu-btn {
+          display: block;
+        }
+        section,
+        .hero {
+          padding: 5rem 1.4rem;
+        }
+        .hero {
+          min-height: auto;
+          padding-top: 8rem;
+          padding-bottom: 6rem;
+        }
+        .hero-pillars {
+          display: none;
+        }
+        .hero-content {
+          max-width: 100%;
+        }
+        .hero-sub {
+          max-width: 100%;
+          font-size: 1.15rem;
+        }
+        .hero-btns {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+        }
+        .btn-primary,
+        .btn-outline {
+          width: 100%;
+        }
+        .about-grid {
+          gap: 2.5rem;
+        }
+        .about-visual {
+          width: 100%;
+          min-width: 0;
+        }
+        .img-placeholder {
+          width: 100%;
+        }
+        .section-title {
+          font-size: 2rem;
+          line-height: 1.2;
+        }
+        .section-desc {
+          max-width: 100%;
+        }
+        .specs-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-top {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 700px) {
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-h1 {
+          font-size: 3rem;
+        }
+        .mobile-link {
+          font-size: 1.8rem;
+        }
+        .stats-row {
+          gap: 1rem;
+        }
+        .floor-card-body {
+          padding: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav id="navbar">
+      <a class="nav-logo" href="#">
+        <img
+          class="nav-logo-img"
+          src="./assets/logo.png"
+          alt="logo"
+          onerror="
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'flex';
+          "
+        />
+        <div
+          style="
+            display: none;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2979ff, #7b2fbe);
+            border-radius: 8px;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+          "
+        >
+          N³
         </div>
-
-        <div class="stat-box fade-up">
-          <span class="stat-num">240Hz</span>
-          <span class="stat-label">Monitors</span>
-        </div>
-
-        <div class="stat-box fade-up">
-          <span class="stat-num">4K</span>
-          <span class="stat-label">Streaming</span>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="about-visual fade-right">
-
-      <div class="img-placeholder">
-      </div>
-
-      <div class="about-glow"></div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CAMPUS -->
-
-<section class="campus-section" id="campus">
-
-  <p class="section-label fade-up">
-    The Campus
-  </p>
-
-  <h2 class="section-title fade-up">
-    Three Floors.<br>
-    One Universe.
-  </h2>
-
-  <p class="section-desc fade-up">
-    Explore each floor of the campus.
-  </p>
-
-  <div class="campus-grid">
-
-    <!-- CARD 1 -->
-
-    <div class="floor-card fade-up">
-
-      <div class="floor-card-img-ph img1">
-      </div>
-
-      <div class="floor-card-body">
-
-        <div class="floor-num">
-          Productivity Zone
-        </div>
-
-        <div class="floor-title">
-          The Workspace
-        </div>
-
-        <ul class="floor-features">
-          <li>Minimalist design for deep focus</li>
-          <li>Quiet desks & meeting rooms</li>
-          <li>Blazing-fast internet</li>
-          <li>Premium ergonomic seating</li>
-        </ul>
-
-      </div>
-
-    </div>
-
-    <!-- CARD 2 -->
-
-    <div class="floor-card fade-up">
-
-      <div class="floor-card-img-ph img2">
-      </div>
-
-      <div class="floor-card-body">
-
-        <div class="floor-num">
-          Gaming Arena
-        </div>
-
-        <div class="floor-title">
-          The Battleground
-        </div>
-
-        <ul class="floor-features">
-          <li>RTX gaming rigs</li>
-          <li>240Hz competitive monitors</li>
-          <li>Esports tournament stage</li>
-          <li>Immersive RGB environment</li>
-        </ul>
-
-      </div>
-
-    </div>
-
-    <!-- CARD 3 -->
-
-    <div class="floor-card fade-up">
-
-      <div class="floor-card-img-ph img3">
-      </div>
-
-      <div class="floor-card-body">
-
-        <div class="floor-num">
-          Creator Studios
-        </div>
-
-        <div class="floor-title">
-          The Studio
-        </div>
-
-        <ul class="floor-features">
-          <li>Streaming booths</li>
-          <li>Professional recording suites</li>
-          <li>Advanced editing stations</li>
-          <li>Studio-grade microphones</li>
-        </ul>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- TECH -->
-
-<section id="specs" style="background:var(--dark-2);">
-
-  <p class="section-label fade-up">
-    Hardware & Infrastructure
-  </p>
-
-  <h2 class="section-title fade-up">
-    Unrivaled Tech.<br>
-    Unmatched Performance.
-  </h2>
-
-  <div class="specs-grid">
-
-    <div class="spec-card c-blue fade-up">
-      <div class="spec-icon">🖥️</div>
-      <div class="spec-title">Gaming PCs</div>
-      <ul class="spec-list">
-        <li>RTX 4070 / 4080</li>
-        <li>Ryzen 7 / Intel i7</li>
-        <li>32GB DDR5</li>
-      </ul>
-    </div>
-
-    <div class="spec-card c-coral fade-up">
-      <div class="spec-icon">🎙️</div>
-      <div class="spec-title">Streaming</div>
-      <ul class="spec-list">
-        <li>4K cameras</li>
-        <li>Studio microphones</li>
-        <li>Professional lighting</li>
-      </ul>
-    </div>
-
-    <div class="spec-card c-purple fade-up">
-      <div class="spec-icon">🌐</div>
-      <div class="spec-title">Network</div>
-      <ul class="spec-list">
-        <li>Fiber optic internet</li>
-        <li>Dedicated bandwidth</li>
-        <li>Enterprise infrastructure</li>
-      </ul>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- TEAM -->
-
-<section class="team-section" id="team">
-
-  <p class="section-label fade-up">
-    The Founders
-  </p>
-
-  <h2 class="section-title fade-up">
-    The People<br>
-    Behind NEXUS³
-  </h2>
-
-  <div class="team-grid">
-
-    <div class="team-card fade-up">
-      <div class="team-avatar">MI</div>
-      <div class="team-name">Meguehout Ismail</div>
-      <div class="team-role">Co-Founder & CEO</div>
-    </div>
-
-    <div class="team-card fade-up">
-      <div class="team-avatar">KY</div>
-      <div class="team-name">Keddam Youcef</div>
-      <div class="team-role">Vision & Market</div>
-    </div>
-
-    <div class="team-card fade-up">
-      <div class="team-avatar">GY</div>
-      <div class="team-name">Guerdouh Yahia</div>
-      <div class="team-role">Facility Design</div>
-    </div>
-
-    <div class="team-card fade-up">
-      <div class="team-avatar">TA</div>
-      <div class="team-name">Taibi Abdelkadder</div>
-      <div class="team-role">Tech & Business</div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CTA -->
-
-<section class="cta-section">
-
-  <div class="cta-bg"></div>
-
-  <div class="cta-content">
-
-    <p class="section-label fade-up" style="justify-content:center;">
-      Ready to Join?
-    </p>
-
-    <h2 class="cta-title fade-up">
-      The future of digital life starts here.
-    </h2>
-
-    <p class="cta-sub fade-up">
-      Book a session, rent a studio,
-      or become a member.
-    </p>
-
-    <div class="hero-btns fade-up">
-      <button class="btn-primary">Book a Session</button>
-      <button class="btn-outline">Get in Touch</button>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-  <div class="footer-top">
-
-    <div>
-      <div class="footer-brand-name">
-        NEXUS<sup>3</sup> STUDIO
-      </div>
-
-      <p class="footer-brand-desc">
-        North Africa's integrated digital campus.
-      </p>
-    </div>
-
-    <div class="footer-col">
-      <h4>Navigate</h4>
-
-      <ul>
+        <span class="nav-logo-text"> NEXUS<sup>3</sup> STUDIO </span>
+      </a>
+      <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#campus">Campus</a></li>
-        <li><a href="#specs">Technology</a></li>
+        <li><a href="#specs">Tech</a></li>
         <li><a href="#team">Team</a></li>
       </ul>
+      <button class="nav-cta">Book a Session</button>
+      <!-- MOBILE MENU BTN -->
+      <button class="menu-btn" id="menuBtn"><span></span> <span></span></button>
+    </nav>
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-content">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#campus" class="mobile-link">Campus</a>
+        <a href="#specs" class="mobile-link">Tech</a>
+        <a href="#team" class="mobile-link">Team</a>
+        <button class="btn-primary mobile-cta">Book a Session</button>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Services</h4>
+    <!-- HERO -->
 
-      <ul>
-        <li><a href="#">Gaming</a></li>
-        <li><a href="#">Coworking</a></li>
-        <li><a href="#">Studios</a></li>
-      </ul>
-    </div>
+    <section class="hero">
+      <div class="hero-bg">
+        <div class="hero-bg-img"></div>
+        <div class="hero-bg-grad"></div>
+        <div class="hero-grid"></div>
+      </div>
 
-  </div>
+      <div class="hero-content">
+        <div class="hero-tag">The Digital Campus of the Next Generation</div>
 
-  <div class="footer-bottom">
+        <h1 class="hero-h1">
+          <span class="accent-blue">Work.</span><br />
+          <span class="accent-coral">Play.</span><br />
+          Create.
+        </h1>
 
-    <span class="footer-copy">
-      © 2025 NEXUS³ Studio
-    </span>
+        <p class="hero-sub">
+          North Africa's most ambitious integrated digital hub — three floors,
+          one premium ecosystem.
+        </p>
 
-    <span class="footer-motto">
-      Work. Play. Create.
-    </span>
+        <div class="hero-btns">
+          <button class="btn-primary">Explore the Campus</button>
+          <button class="btn-outline">Watch the Story</button>
+        </div>
+      </div>
 
-  </div>
+      <div class="hero-pillars">
+        <div class="pillar-chip">
+          <span class="pillar-icon">💼</span>
 
-</footer>
+          <div class="pillar-label">
+            <span>Productivity Zone</span>
+            Floor 01 — Coworking
+          </div>
+        </div>
 
-<!-- JS -->
+        <div class="pillar-chip">
+          <span class="pillar-icon">🎮</span>
 
-<script>
+          <div class="pillar-label">
+            <span>Gaming Arena</span>
+            Floor 02 — Esports
+          </div>
+        </div>
 
-gsap.registerPlugin(ScrollTrigger);
+        <div class="pillar-chip">
+          <span class="pillar-icon">🎙️</span>
 
-/* HERO */
+          <div class="pillar-label">
+            <span>Creator Studios</span>
+            Floor 03 — Content
+          </div>
+        </div>
+      </div>
+    </section>
 
-gsap.from('.hero-tag',{
-  opacity:0,
-  y:24,
-  duration:.9,
-  delay:.2,
-  ease:'power3.out'
-});
+    <!-- ABOUT -->
 
-gsap.from('.hero-h1',{
-  opacity:0,
-  y:40,
-  duration:1.1,
-  delay:.35,
-  ease:'power3.out'
-});
+    <section id="about" style="background: var(--dark-2)">
+      <div class="about-grid">
+        <div>
+          <p class="section-label fade-left">Who We Are</p>
 
-gsap.from('.hero-sub',{
-  opacity:0,
-  y:28,
-  duration:.9,
-  delay:.55,
-  ease:'power3.out'
-});
+          <h2 class="section-title fade-left">
+            The Digital Nexus<br />
+            of North Africa
+          </h2>
 
-gsap.from('.hero-btns',{
-  opacity:0,
-  y:20,
-  duration:.8,
-  delay:.72,
-  ease:'power3.out'
-});
+          <p class="section-desc fade-left">
+            NEXUS³ Studio is a groundbreaking 3-floor digital campus in Algeria,
+            meticulously designed to converge the essential pillars of modern
+            digital life into one premium ecosystem.
+          </p>
 
-gsap.from('.pillar-chip',{
-  opacity:0,
-  x:40,
-  duration:.8,
-  delay:.85,
-  stagger:.14,
-  ease:'power3.out'
-});
+          <div class="stats-row">
+            <div class="stat-box fade-up">
+              <span class="stat-num">3</span>
+              <span class="stat-label">Floors</span>
+            </div>
 
-/* SCROLL ANIMS */
+            <div class="stat-box fade-up">
+              <span class="stat-num">240Hz</span>
+              <span class="stat-label">Monitors</span>
+            </div>
 
-document.querySelectorAll('.fade-up').forEach(el=>{
+            <div class="stat-box fade-up">
+              <span class="stat-num">4K</span>
+              <span class="stat-label">Streaming</span>
+            </div>
+          </div>
+        </div>
 
-  gsap.to(el,{
-    opacity:1,
-    y:0,
-    duration:.75,
-    ease:'power3.out',
+        <div class="about-visual fade-right">
+          <div class="img-placeholder"></div>
 
-    scrollTrigger:{
-      trigger:el,
-      start:'top 88%',
-      toggleActions:'play none none none'
-    }
-  });
+          <div class="about-glow"></div>
+        </div>
+      </div>
+    </section>
 
-});
+    <!-- CAMPUS -->
 
-document.querySelectorAll('.fade-left').forEach(el=>{
+    <section class="campus-section" id="campus">
+      <p class="section-label fade-up">The Campus</p>
 
-  gsap.to(el,{
-    opacity:1,
-    x:0,
-    duration:.75,
-    ease:'power3.out',
+      <h2 class="section-title fade-up">
+        Three Floors.<br />
+        One Universe.
+      </h2>
 
-    scrollTrigger:{
-      trigger:el,
-      start:'top 88%',
-      toggleActions:'play none none none'
-    }
-  });
+      <p class="section-desc fade-up">Explore each floor of the campus.</p>
 
-});
+      <div class="campus-grid">
+        <!-- CARD 1 -->
 
-document.querySelectorAll('.fade-right').forEach(el=>{
+        <div class="floor-card fade-up">
+          <div class="floor-card-img-ph img1"></div>
 
-  gsap.to(el,{
-    opacity:1,
-    x:0,
-    duration:.75,
-    ease:'power3.out',
+          <div class="floor-card-body">
+            <div class="floor-num">Productivity Zone</div>
 
-    scrollTrigger:{
-      trigger:el,
-      start:'top 88%',
-      toggleActions:'play none none none'
-    }
-  });
+            <div class="floor-title">The Workspace</div>
 
-});
+            <ul class="floor-features">
+              <li>Minimalist design for deep focus</li>
+              <li>Quiet desks & meeting rooms</li>
+              <li>Blazing-fast internet</li>
+              <li>Premium ergonomic seating</li>
+            </ul>
+          </div>
+        </div>
 
-/* NAV */
+        <!-- CARD 2 -->
 
-window.addEventListener('scroll',()=>{
+        <div class="floor-card fade-up">
+          <div class="floor-card-img-ph img2"></div>
 
-  const nav=document.getElementById('navbar');
+          <div class="floor-card-body">
+            <div class="floor-num">Gaming Arena</div>
 
-  nav.style.borderBottomColor=
-  window.scrollY > 60
-  ? 'rgba(41,121,255,0.25)'
-  : 'rgba(41,121,255,0.18)';
+            <div class="floor-title">The Battleground</div>
 
-});
+            <ul class="floor-features">
+              <li>RTX gaming rigs</li>
+              <li>240Hz competitive monitors</li>
+              <li>Esports tournament stage</li>
+              <li>Immersive RGB environment</li>
+            </ul>
+          </div>
+        </div>
 
-const menuBtn = document.getElementById('menuBtn'); const mobileMenu = document.getElementById('mobileMenu'); menuBtn.addEventListener('click',()=>{ menuBtn.classList.toggle('active'); mobileMenu.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; }); document.querySelectorAll('.mobile-link').forEach(link=>{ link.addEventListener('click',()=>{ menuBtn.classList.remove('active'); mobileMenu.classList.remove('active'); document.body.style.overflow=''; }); });
+        <!-- CARD 3 -->
 
-</script>
+        <div class="floor-card fade-up">
+          <div class="floor-card-img-ph img3"></div>
 
-</body>
+          <div class="floor-card-body">
+            <div class="floor-num">Creator Studios</div>
+
+            <div class="floor-title">The Studio</div>
+
+            <ul class="floor-features">
+              <li>Streaming booths</li>
+              <li>Professional recording suites</li>
+              <li>Advanced editing stations</li>
+              <li>Studio-grade microphones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH -->
+
+    <section id="specs" style="background: var(--dark-2)">
+      <p class="section-label fade-up">Hardware & Infrastructure</p>
+
+      <h2 class="section-title fade-up">
+        Unrivaled Tech.<br />
+        Unmatched Performance.
+      </h2>
+
+      <div class="specs-grid">
+        <div class="spec-card c-blue fade-up">
+          <div class="spec-icon">🖥️</div>
+          <div class="spec-title">Gaming PCs</div>
+          <ul class="spec-list">
+            <li>RTX 4070 / 4080</li>
+            <li>Ryzen 7 / Intel i7</li>
+            <li>32GB DDR5</li>
+          </ul>
+        </div>
+
+        <div class="spec-card c-coral fade-up">
+          <div class="spec-icon">🎙️</div>
+          <div class="spec-title">Streaming</div>
+          <ul class="spec-list">
+            <li>4K cameras</li>
+            <li>Studio microphones</li>
+            <li>Professional lighting</li>
+          </ul>
+        </div>
+
+        <div class="spec-card c-purple fade-up">
+          <div class="spec-icon">🌐</div>
+          <div class="spec-title">Network</div>
+          <ul class="spec-list">
+            <li>Fiber optic internet</li>
+            <li>Dedicated bandwidth</li>
+            <li>Enterprise infrastructure</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+
+    <section class="team-section" id="team">
+      <p class="section-label fade-up">The Founders</p>
+
+      <h2 class="section-title fade-up">
+        The People<br />
+        Behind NEXUS³
+      </h2>
+
+      <div class="team-grid">
+        <div class="team-card fade-up">
+          <div class="team-avatar">MI</div>
+          <div class="team-name">Meguehout Ismail</div>
+          <div class="team-role">Co-Founder & CEO</div>
+        </div>
+
+        <div class="team-card fade-up">
+          <div class="team-avatar">KY</div>
+          <div class="team-name">Keddam Youcef</div>
+          <div class="team-role">Vision & Market</div>
+        </div>
+
+        <div class="team-card fade-up">
+          <div class="team-avatar">GY</div>
+          <div class="team-name">Guerdouh Yahia</div>
+          <div class="team-role">Facility Design</div>
+        </div>
+
+        <div class="team-card fade-up">
+          <div class="team-avatar">TA</div>
+          <div class="team-name">Taibi Abdelkadder</div>
+          <div class="team-role">Tech & Business</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta-section">
+      <div class="cta-bg"></div>
+
+      <div class="cta-content">
+        <p class="section-label fade-up" style="justify-content: center">
+          Ready to Join?
+        </p>
+
+        <h2 class="cta-title fade-up">
+          The future of digital life starts here.
+        </h2>
+
+        <p class="cta-sub fade-up">
+          Book a session, rent a studio, or become a member.
+        </p>
+
+        <div class="hero-btns fade-up">
+          <button class="btn-primary">Book a Session</button>
+          <button class="btn-outline">Get in Touch</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">NEXUS<sup>3</sup> STUDIO</div>
+
+          <p class="footer-brand-desc">
+            North Africa's integrated digital campus.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigate</h4>
+
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#campus">Campus</a></li>
+            <li><a href="#specs">Technology</a></li>
+            <li><a href="#team">Team</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+
+          <ul>
+            <li><a href="#">Gaming</a></li>
+            <li><a href="#">Coworking</a></li>
+            <li><a href="#">Studios</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy"> © 2025 NEXUS³ Studio </span>
+
+        <span class="footer-motto"> Work. Play. Create. </span>
+      </div>
+    </footer>
+
+    <!-- JS -->
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* HERO */
+
+      gsap.from(".hero-tag", {
+        opacity: 0,
+        y: 24,
+        duration: 0.9,
+        delay: 0.2,
+        ease: "power3.out",
+      });
+
+      gsap.from(".hero-h1", {
+        opacity: 0,
+        y: 40,
+        duration: 1.1,
+        delay: 0.35,
+        ease: "power3.out",
+      });
+
+      gsap.from(".hero-sub", {
+        opacity: 0,
+        y: 28,
+        duration: 0.9,
+        delay: 0.55,
+        ease: "power3.out",
+      });
+
+      gsap.from(".hero-btns", {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 0.72,
+        ease: "power3.out",
+      });
+
+      gsap.from(".pillar-chip", {
+        opacity: 0,
+        x: 40,
+        duration: 0.8,
+        delay: 0.85,
+        stagger: 0.14,
+        ease: "power3.out",
+      });
+
+      /* SCROLL ANIMS */
+
+      document.querySelectorAll(".fade-up").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: "power3.out",
+
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+
+      document.querySelectorAll(".fade-left").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          x: 0,
+          duration: 0.75,
+          ease: "power3.out",
+
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+
+      document.querySelectorAll(".fade-right").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          x: 0,
+          duration: 0.75,
+          ease: "power3.out",
+
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+
+      /* NAV */
+
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("navbar");
+
+        nav.style.borderBottomColor =
+          window.scrollY > 60
+            ? "rgba(41,121,255,0.25)"
+            : "rgba(41,121,255,0.18)";
+      });
+
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      menuBtn.addEventListener("click", () => {
+        menuBtn.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+        document.body.style.overflow = mobileMenu.classList.contains("active")
+          ? "hidden"
+          : "";
+      });
+      document.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuBtn.classList.remove("active");
+          mobileMenu.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+      });
+    </script>
+  </body>
 </html>
-
